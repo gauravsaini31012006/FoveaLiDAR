@@ -1,0 +1,184 @@
+# FoveaLiDAR Default Configuration
+# This file contains all configurable parameters for the application.
+# No critical behavior should require editing source code.
+
+# ==============================================================================
+# Foveation Configuration
+# ==============================================================================
+foveation:
+  enabled: true
+  
+  # Importance weights (must sum to 1.0)
+  weights:
+    distance: 0.20
+    semantic: 0.25
+    uncertainty: 0.25
+    geometry: 0.15
+    motion: 0.15
+  
+  # Maximum refined regions per frame
+  max_refined_regions: 128
+  
+  # Refinement threshold (0-1), regions above this get refined
+  refinement_threshold: 0.6
+  
+  # Vehicle corridor parameters
+  vehicle_corridor_enabled: true
+  vehicle_corridor_width_m: 4.0
+  vehicle_corridor_max_range_m: 50.0
+  vehicle_corridor_angle_deg: 60.0
+  vehicle_corridor_importance_boost: 0.3
+
+# ==============================================================================
+# Compute Configuration
+# ==============================================================================
+compute:
+  # Compute mode: "max_quality", "balanced", "low_power", "cpu_only"
+  mode: "balanced"
+  
+  # Maximum refined regions (budget)
+  max_refined_regions: 128
+  
+  # Point downsampling factor (1 = no downsampling)
+  point_downsample_factor: 1
+  
+  # Rendering rate limit (FPS)
+  max_render_fps: 30
+  
+  # AI inference frequency divider
+  ai_frequency_divider: 1
+  
+  # Enable GPU if available
+  prefer_gpu: true
+  
+  # VRAM limit in GB (0 = auto)
+  vram_limit_gb: 0
+  
+  # CPU thread count (0 = auto)
+  cpu_threads: 0
+
+# ==============================================================================
+# Preprocessing Configuration
+# ==============================================================================
+preprocessing:
+  # Voxel downsampling (pre-filter)
+  voxel_downsample_enabled: true
+  voxel_downsample_size_m: 0.05
+  
+  # Range filtering
+  range_filter_enabled: true
+  range_filter_min_m: 1.0
+  range_filter_max_m: 100.0
+  
+  # Intensity normalization
+  intensity_normalization_enabled: true
+  intensity_normalization_method: "linear"
+  intensity_normalization_min: 0.0
+  intensity_normalization_max: 255.0
+  
+  # Statistical outlier removal
+  statistical_outlier_removal_enabled: false
+  statistical_outlier_removal_nb_neighbors: 20
+  statistical_outlier_removal_std_ratio: 2.0
+
+# ==============================================================================
+# Geometry Configuration
+# ==============================================================================
+geometry:
+  # Features to compute
+  compute_density: true
+  compute_height_stats: true
+  compute_roughness: true
+  compute_slope: true
+  compute_density_gradient: true
+  compute_complexity: true
+  
+  # Bin size for spatial binning (meters)
+  bin_size_m: 0.5
+  
+  # Neighborhood radius for local features
+  neighborhood_radius_m: 1.0
+
+# ==============================================================================
+# Visualization Configuration
+# ==============================================================================
+visualization:
+  # Window size
+  window_width: 1600
+  window_height: 900
+  
+  # 3D view settings
+  view3d_point_size: 2
+  view3d_background_color: [0.1, 0.1, 0.1]
+  view3d_show_axes: true
+  view3d_show_grid: true
+  
+  # 2.5D map view settings
+  map2d_colormap: "viridis"
+  map2d_show_cell_boundaries: false
+  map2d_show_importance: false
+  map2d_show_uncertainty: false
+  map2d_show_resolution: false
+  map2d_opacity: 0.8
+  
+  # Debug visualization toggles
+  debug_show_points: false
+  debug_show_cell_ids: false
+  debug_show_cell_boundaries: false
+  debug_show_importance: false
+  debug_show_uncertainty: false
+  debug_show_resolution: false
+  debug_show_point_assignment: false
+  debug_show_filtered_points: false
+
+# ==============================================================================
+# Data Configuration
+# ==============================================================================
+data:
+  # KITTI dataset root path (user must configure)
+  kitti_root: ""
+  
+  # Sequence to load (e.g., "00", "01", ...)
+  sequence: "00"
+  
+  # Frame range (empty = all frames)
+  frame_start: 0
+  frame_end: -1
+  
+  # Playback settings
+  playback_auto_play: false
+  playback_loop: true
+  playback_target_fps: 10
+
+# ==============================================================================
+# Benchmark Configuration
+# ==============================================================================
+benchmark:
+  # Number of warmup frames to exclude
+  warmup_frames: 5
+  
+  # Number of frames to benchmark
+  benchmark_frames: 100
+  
+  # Output directory for results
+  output_dir: "benchmarks/results"
+  
+  # Export formats
+  export_json: true
+  export_csv: true
+  
+  # System info to include
+  include_system_info: true
+
+# ==============================================================================
+# Logging Configuration
+# ==============================================================================
+logging:
+  level: "INFO"
+  file_enabled: true
+  file_path: "logs/fovealidar.log"
+  max_file_size_mb: 10
+  backup_count: 5
+  console_enabled: true
+  format: "%(asctime)s | %(levelname)-8s | %(name)s | %(message)s"
+  date_format: "%Y-%m-%d %H:%M:%S"

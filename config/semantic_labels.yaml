@@ -1,0 +1,184 @@
+# Semantic Label Definitions for FoveaLiDAR
+# This file maps model label IDs to semantic classes and importance levels.
+# The mapping must match the actual selected model's label set.
+# Never assume a class exists if the model does not output it.
+
+# Label format:
+#   label_id:
+#     name: "human_readable_name"
+#     category: "category_name"  # e.g., "vehicle", "human", "static", "background"
+#     importance: "critical" | "high" | "medium" | "low" | "ignore"
+#     color: [R, G, B]  # For visualization (0-255)
+
+# SemanticKITTI label mapping (common reference)
+# https://github.com/PRBonn/semantic-kitti-api
+
+labels:
+  0:
+    name: "unlabeled"
+    category: "ignore"
+    importance: "ignore"
+    color: [0, 0, 0]
+  
+  1:
+    name: "outlier"
+    category: "ignore"
+    importance: "ignore"
+    color: [0, 0, 0]
+  
+  10:
+    name: "car"
+    category: "vehicle"
+    importance: "critical"
+    color: [245, 150, 100]
+  
+  11:
+    name: "bicycle"
+    category: "vehicle"
+    importance: "high"
+    color: [245, 230, 100]
+  
+  13:
+    name: "bus"
+    category: "vehicle"
+    importance: "critical"
+    color: [250, 80, 100]
+  
+  15:
+    name: "motorcycle"
+    category: "vehicle"
+    importance: "high"
+    color: [150, 60, 30]
+  
+  16:
+    name: "on-rails"
+    category: "vehicle"
+    importance: "medium"
+    color: [255, 0, 0]
+  
+  18:
+    name: "truck"
+    category: "vehicle"
+    importance: "critical"
+    color: [180, 30, 80]
+  
+  20:
+    name: "other-vehicle"
+    category: "vehicle"
+    importance: "high"
+    color: [255, 0, 0]
+  
+  30:
+    name: "person"
+    category: "human"
+    importance: "critical"
+    color: [30, 30, 255]
+  
+  31:
+    name: "bicyclist"
+    category: "human"
+    importance: "critical"
+    color: [200, 40, 255]
+  
+  32:
+    name: "motorcyclist"
+    category: "human"
+    importance: "critical"
+    color: [90, 30, 150]
+  
+  40:
+    name: "road"
+    category: "drivable"
+    importance: "low"
+    color: [255, 0, 255]
+  
+  44:
+    name: "parking"
+    category: "drivable"
+    importance: "low"
+    color: [255, 150, 255]
+  
+  48:
+    name: "sidewalk"
+    category: "drivable"
+    importance: "low"
+    color: [75, 0, 75]
+  
+  49:
+    name: "other-ground"
+    category: "ground"
+    importance: "low"
+    color: [75, 0, 175]
+  
+  50:
+    name: "building"
+    category: "static"
+    importance: "medium"
+    color: [0, 200, 255]
+  
+  51:
+    name: "fence"
+    category: "static"
+    importance: "medium"
+    color: [50, 120, 255]
+  
+  52:
+    name: "other-structure"
+    category: "static"
+    importance: "medium"
+    color: [0, 175, 0]
+  
+  60:
+    name: "lane-marking"
+    category: "drivable"
+    importance: "low"
+    color: [0, 60, 135]
+  
+  70:
+    name: "vegetation"
+    category: "background"
+    importance: "low"
+    color: [80, 240, 150]
+  
+  71:
+    name: "trunk"
+    category: "static"
+    importance: "medium"
+    color: [150, 240, 255]
+  
+  72:
+    name: "terrain"
+    category: "ground"
+    importance: "low"
+    color: [0, 0, 255]
+  
+  80:
+    name: "pole"
+    category: "static"
+    importance: "medium"
+    color: [255, 255, 50]
+  
+  81:
+    name: "traffic-sign"
+    category: "static"
+    importance: "high"
+    color: [255, 255, 50]
+
+# Importance level weights for foveation
+# These are used when semantic importance contributes to the foveal importance score
+importance_weights:
+  critical: 1.0
+  high: 0.8
+  medium: 0.5
+  low: 0.2
+  ignore: 0.0
+
+# Category importance modifiers (additional weight based on category)
+category_modifiers:
+  vehicle: 1.0
+  human: 1.0
+  static: 0.7
+  drivable: 0.3
+  ground: 0.2
+  background: 0.1
+  ignore: 0.0

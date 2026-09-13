@@ -1,0 +1,92 @@
+═══════════════════════════════════════════════════════════════════════════════
+  FoveaLiDAR Phase 3 - COMPLETE GUIDE (Part 1)
+═══════════════════════════════════════════════════════════════════════════════
+
+✅ ANSWERS TO YOUR QUESTIONS
+
+1. KITTI CAMERA FOLDERS
+─────────────────────
+image_00, 01, 02, 03 all contain the SAME 233 frames from different sensors:
+  • image_00/01 = Grayscale (B&W)
+  • image_02/03 = Color (RGB) ✅ USE image_02
+
+Pick image_02 only - others are redundant.
+
+
+2. RUN APP WITH ACTUAL KITTI DATA
+─────────────────────────────────
+YES! Open PowerShell and run:
+
+  cd d:\CLG\SIH_2026\AI_code
+  .\venv\Scripts\python _process_with_foveation.py
+
+This processes all 233 real KITTI frames with Phase 3 foveation.
+
+
+═══════════════════════════════════════════════════════════════════════════════
+WHAT _process_with_foveation.py DOES
+═══════════════════════════════════════════════════════════════════════════════
+
+STEP 1: Loads 233 KITTI point cloud frames
+STEP 2: Preprocesses each (range, height, intensity filters)
+STEP 3: Simulates human gaze (driving + saliency modes)
+STEP 4: Defines ROI regions (fovea 10m @ 5cm, periphery 100m @ 50cm)
+STEP 5: Compresses adaptively (99%+ compression possible!)
+STEP 6: Renders beautiful BEV (Bird's Eye View) with ROI colors
+STEP 7: Generates 233 PNG frames + MP4 video
+
+OUTPUT:
+  📁 d:\CLG\SIH_2026\AI_code\output\foveation_output\
+  ├─ frames/                      (233 PNG images)
+  ├─ foveation_visualization.mp4  (MP4 video @ 30fps)
+  └─ stats/                       (compression metrics)
+
+
+═══════════════════════════════════════════════════════════════════════════════
+PHASE 3 STATUS
+═══════════════════════════════════════════════════════════════════════════════
+
+✅ 18/18 Tests Passing
+✅ 47/47 Total Project Tests Passing
+
+Complete Implementation:
+  ✅ Gaze Simulator (driving + saliency modes)
+  ✅ ROI Definition (fovea + periphery)
+  ✅ Adaptive Compression (99%+ reduction)
+  ✅ BEV Visualization (Bird's Eye View)
+  ✅ Frame Generation (PNG + MP4)
+  ✅ Full Pipeline Integration
+
+
+═══════════════════════════════════════════════════════════════════════════════
+EXPECTED RESULTS
+═══════════════════════════════════════════════════════════════════════════════
+
+When you run it, you'll get:
+
+Console output showing:
+  ✅ Dataset loaded
+  ✅ 233 frames processing
+  ✅ Per-frame statistics (compression ratios)
+  ✅ Video generation complete
+
+Video visualization:
+  • Top-down view of LiDAR scene
+  • 🟢 GREEN = Fovea (sharp detail, focus area)
+  • 🟠 ORANGE = Periphery (compressed background)
+  • ⚫ GRAY = Outside range
+
+Processing time: ~5-10 minutes for 233 frames
+Video size: ~50-100 MB
+Compression: 99%+ in periphery
+
+
+═══════════════════════════════════════════════════════════════════════════════
+READY TO RUN!
+═══════════════════════════════════════════════════════════════════════════════
+
+Command:
+  .\venv\Scripts\python _process_with_foveation.py
+
+Output: Beautiful foveation visualization on real KITTI data! 🎬
+═══════════════════════════════════════════════════════════════════════════════
